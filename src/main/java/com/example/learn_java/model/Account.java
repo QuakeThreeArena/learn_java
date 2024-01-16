@@ -1,23 +1,37 @@
 package com.example.learn_java.model;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+import java.util.UUID;
+@Entity
+@Table(name = "account")
 public class Account {
-    private int id;
+    @Id
+    @GeneratedValue
+    private UUID id;
     private String name;
-    private int phone;
+    private String phone;
     private String location;
 
-    public Account(int id, String name, int phone, String location) {
+    public Account(UUID id, String name, String phone, String location) {
         this.id = id;
         this.name = name;
         this.phone = phone;
         this.location = location;
     }
 
+    public Account() {
+
+    }
+
 
     public String getLocation() {
         return location;
     }
-    public int getId() {
+    public UUID getId() {
         return id;
     }
 
@@ -25,14 +39,14 @@ public class Account {
         return name;
     }
 
-    public int getPhone() {
+    public String getPhone() {
         return phone;
     }
     public void setLocation(String location) {
         this.location = location;
     }
 
-    public void setId(int id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 
@@ -40,7 +54,7 @@ public class Account {
         this.name = name;
     }
 
-    public void setPhone(int phone) {
+    public void setPhone(String phone) {
         this.phone = phone;
     }
 
