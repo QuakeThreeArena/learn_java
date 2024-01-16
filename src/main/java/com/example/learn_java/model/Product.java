@@ -8,7 +8,7 @@ import jakarta.persistence.Table;
 import java.util.UUID;
 
 @Entity
-@Table(name = "Goods")
+@Table(name = "product")
 public class Product {
     @Id
     @GeneratedValue
@@ -17,13 +17,15 @@ public class Product {
     private int price;
     private int weight;
     private String description;
+    private String size;
 
-    public Product(UUID id, String country, int price, int weight, String description) {
+    public Product(UUID id, String country, int price, int weight, String description, String size) {
         this.id = id;
         this.country = country;
         this.price = price;
         this.weight = weight;
         this.description = description;
+        this.size = size;
     }
     public Product(){
 
@@ -67,5 +69,13 @@ public class Product {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getSize() {
+        return size;
+    }
+
+    public void setSize(String size) {
+        this.size = size;
     }
 }

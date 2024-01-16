@@ -5,6 +5,15 @@ public class RegisterRequestProduct {
     private int price;
     private int weight;
     private String description;
+    private String size;
+
+    public String getSize() {
+        return size;
+    }
+
+    public void setSize(String size) {
+        this.size = size;
+    }
 
     public String getCountry() {
         return country;
