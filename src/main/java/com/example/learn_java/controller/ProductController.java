@@ -4,23 +4,24 @@ import com.example.learn_java.controller.dto.RegisterRequestProduct;
 import com.example.learn_java.model.Product;
 import com.example.learn_java.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 
+import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @RestController
 public class ProductController {
-    public  final  ProductRepository productRepository;
+    public final ProductRepository productRepository;
+
     @Autowired
-    public ProductController (ProductRepository productRepository){
+    public ProductController(ProductRepository productRepository) {
         this.productRepository = productRepository;
     }
+
     @PostMapping("/product")
-    public UUID create(@RequestBody RegisterRequestProduct requestProduct){
+    public UUID create(@RequestBody RegisterRequestProduct requestProduct) {
         Product product = new Product();
         product.setCountry(requestProduct.getCountry());
         product.setDescription(requestProduct.getDescription());
@@ -30,9 +31,24 @@ public class ProductController {
 
         return productRepository.save(product).getId();
     }
-    @GetMapping("/product")
-    public Product getAll (){
 
-        return null;
+    @GetMapping("/product")
+    public List<Product> getAllProducts() {
+        return productRepository.findAll();
+    }
+
+    @PutMapping("/product")
+    public UUID update(UUID uuid, String newSize, String newCountry, int newWeight, int newPrice, String newDescription) {
+        Optional<Product> product = productRepository.findById(uuid);
+
+            Product newProduct = product.get();
+            newProduct.setDescription(newDescription);
+            newProduct.setPrice(newPrice);
+            newProduct.setSize(newSize);
+            newProduct.setCountry(newCountry);
+            newProduct.setWeight(newWeight);
+
+            return productRepository.save(newProduct).getId();
+
     }
 }
