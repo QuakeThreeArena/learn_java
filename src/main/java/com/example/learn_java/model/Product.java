@@ -7,19 +7,20 @@ import jakarta.persistence.Table;
 
 import java.util.UUID;
 
+
 @Entity
-@Table(name = "product")
+@Table(name = "goods")
 public class Product {
     @Id
-    @GeneratedValue
+    @GeneratedValue(generator = "UUID")
     private UUID id;
     private String country;
-    private int price;
-    private int weight;
+    private String price;
+    private String weight;
     private String description;
     private String size;
 
-    public Product(UUID id, String country, int price, int weight, String description, String size) {
+    public Product(UUID id, String country, String price, String weight, String description, String size) {
         this.id = id;
         this.country = country;
         this.price = price;
@@ -27,7 +28,8 @@ public class Product {
         this.description = description;
         this.size = size;
     }
-    public Product(){
+
+    public Product() {
 
     }
 
@@ -47,19 +49,19 @@ public class Product {
         this.country = country;
     }
 
-    public int getPrice() {
+    public String getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(String price) {
         this.price = price;
     }
 
-    public int getWeight() {
+    public String getWeight() {
         return weight;
     }
 
-    public void setWeight(int weight) {
+    public void setWeight(String weight) {
         this.weight = weight;
     }
 

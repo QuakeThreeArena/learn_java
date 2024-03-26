@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 
+import java.net.http.HttpRequest;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -31,24 +32,33 @@ public class ProductController {
 
         return productRepository.save(product).getId();
     }
-
+        //
     @GetMapping("/product")
     public List<Product> getAllProducts() {
         return productRepository.findAll();
+
+
     }
+    @GetMapping("/product/1")
+    public Optional<Product> getProduct( RegisterRequestProduct registerRequestProduct) {
+        return productRepository.findById(registerRequestProduct.getUuid());
+  }
+
+
 
     @PutMapping("/product")
-    public UUID update(UUID uuid, String newSize, String newCountry, int newWeight, int newPrice, String newDescription) {
-        Optional<Product> product = productRepository.findById(uuid);
+    public UUID update(@RequestBody RegisterRequestProduct registerRequestProduct) {
+        Optional<Product> product = productRepository.findById(registerRequestProduct.getUuid());
 
-            Product newProduct = product.get();
-            newProduct.setDescription(newDescription);
-            newProduct.setPrice(newPrice);
-            newProduct.setSize(newSize);
-            newProduct.setCountry(newCountry);
-            newProduct.setWeight(newWeight);
+        Product newProduct = product.get();
+        newProduct.setDescription(registerRequestProduct.getDescription());
+        newProduct.setPrice(registerRequestProduct.getPrice());
+        newProduct.setSize(registerRequestProduct.getSize());
+        newProduct.setCountry(registerRequestProduct.getCountry());
+        newProduct.setWeight(registerRequestProduct.getWeight());
 
-            return productRepository.save(newProduct).getId();
+        return productRepository.save(newProduct).getId();
 
     }
+
 }

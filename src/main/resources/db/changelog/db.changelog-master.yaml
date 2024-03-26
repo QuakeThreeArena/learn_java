@@ -1,0 +1,5 @@
+databaseChangeLog:
+- include:
+    file: db/changelog/2024-01-01--0001-create_users.sql
+- include:
+    file: db/changelog/2024-01-01--0002-create_goods.sql
