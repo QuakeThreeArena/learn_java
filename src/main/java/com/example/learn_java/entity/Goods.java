@@ -1,4 +1,4 @@
-package com.example.learn_java.model;
+package com.example.learn_java.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -34,13 +34,12 @@ public class Goods {
     @Getter
     private UUID userId;
 
-    public Goods(UUID id, String name, String description, String location, String price, UUID userId) {
-        this.id = id;
+    public Goods(String name, String description, String location, String price,UUID userId) {
+        this.userId = userId;
         this.name = name;
         this.description = description;
         this.location = location;
         this.price = price;
-        this.userId = userId;
     }
 
     public Goods() {

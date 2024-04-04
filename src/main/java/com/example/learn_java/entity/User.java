@@ -1,4 +1,4 @@
-package com.example.learn_java.model;
+package com.example.learn_java.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -12,7 +12,6 @@ public class User {
     @Id
     @GeneratedValue
     @Getter
-    @Setter
     private UUID id;
 
     @Getter
@@ -39,8 +38,7 @@ public class User {
     @Setter
     private String email;
 
-    public User(UUID id, String username, String contactPhone, String password, String firstname, String lastname, String email) {
-        this.id = id;
+    public User(String username, String contactPhone, String password, String firstname, String lastname, String email) {
         this.username = username;
         this.contactPhone = contactPhone;
         this.password = password;
@@ -48,7 +46,6 @@ public class User {
         this.lastname = lastname;
         this.email = email;
     }
-
     public User() {
 
     }
