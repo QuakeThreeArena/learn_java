@@ -8,6 +8,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 
+import java.math.BigDecimal;
 import java.util.UUID;
 
 
@@ -30,11 +31,11 @@ public class Goods {
     private String location;
     @Getter
     @Setter
-    private String price;
+    private BigDecimal price;
     @Getter
     private UUID userId;
 
-    public Goods(String name, String description, String location, String price,UUID userId) {
+    public Goods(String name, String description, String location, BigDecimal price,UUID userId) {
         this.userId = userId;
         this.name = name;
         this.description = description;

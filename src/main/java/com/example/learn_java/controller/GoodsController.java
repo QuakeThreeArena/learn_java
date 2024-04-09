@@ -1,45 +1,48 @@
 package com.example.learn_java.controller;
 
-import com.example.learn_java.controller.dto.RegisterRequestGoods;
-import com.example.learn_java.entity.Goods;
+import com.example.learn_java.controller.dto.GoodsDto;
 import com.example.learn_java.service.GoodsService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 import java.util.UUID;
 
 @RestController
 public class GoodsController {
-    public final GoodsService goodsService;
+    private final GoodsService goodsService;
 
-    @Autowired
-    public GoodsController(GoodsService goodsService) {
-        this.goodsService = goodsService;
+    public GoodsController(GoodsService userService) {
+        this.goodsService = userService;
     }
 
-    @PostMapping("/goods/registration")
-    public UUID create(@RequestBody RegisterRequestGoods request) {
-        return goodsService.registration(request);
+    @GetMapping("/goods/{id}")
+    public GoodsDto findById(@PathVariable("id") UUID id) {
+        return goodsService.findById(id);
     }
 
-    @PutMapping("/goods/update")
-    public UUID update (@RequestParam RegisterRequestGoods requestGoods){
-        return  goodsService.update(requestGoods);
-    }
-    @DeleteMapping("goods/deleted")
-    public UUID deleted (@RequestParam RegisterRequestGoods requestGoods){
-        return goodsService.deleted(requestGoods);
-    }
-    @GetMapping("goods/getAll")
-    public List<Goods> findByAll(){
-        return  goodsService.findByAll();
+    @PostMapping("/goods")
+    public GoodsDto create(@RequestBody GoodsDto goodsDto) {
+        return goodsService.create(goodsDto);
     }
 
+    @PutMapping("/goods/{id}")
+    public GoodsDto update(@PathVariable("id") UUID id, @RequestBody GoodsDto goodsDto) {
+        return goodsService.update(id, goodsDto);
+    }
 
+    @DeleteMapping("/goods/{id}")
+    public void delete(@PathVariable("id") UUID id) {
+        goodsService.delete(id);
+    }
 
-
-
-
+    @GetMapping("/goods")
+    public List<GoodsDto> getAll() {
+        return goodsService.getAll();
+    }
 }

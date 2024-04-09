@@ -9,6 +9,4 @@ import java.util.UUID;
 
 @Repository
 public interface GoodsRepository extends JpaRepository <Goods, UUID> {
-
-
 }
